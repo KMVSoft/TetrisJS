@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<title>tetris</title>
+		<style>
+			@font-face {
+			    font-family: CellFont;
+			    src: url("fonts/cells.ttf") format("truetype");
+			}
+			body {
+				background-color: #414141;
+			}
+			#tetrisDisplay {
+				border: solid 1px black;
+			}
+			.gameTitle {
+				font-size: 150px;
+				font-family: CellFont;
+			}
+
+			.gameScore {
+				font-size: 50px;
+				font-family: CellFont;
+				color: red;
+			}
+			.green  {
+				color: #007F0E;
+			}
+			.deepPink {
+				color: #FF00FF;
+			}
+			.red {
+				color: red;
+			}
+			.blue {		
+				color: blue;
+			}
+			.yellow {
+				color: #FFD800;
+			}
+
+
+		</style>
+	</head>
+	<body>
+		<div>
+			<span class="green gameTitle">T</span>
+			<span class="deepPink gameTitle">E</span>
+			<span class="green gameTitle">T</span>
+			<span class="yellow gameTitle">R</span>
+			<span class="blue gameTitle">I</span>
+			<span class="red gameTitle">S</span>
+		</div>
+		<dir>
+			<span class="gameScore">SCORE: </span> <span class="gameScore" id="score">0</span>
+		</dir>
+
+		<canvas id="tetrisDisplay" width="200px" height="300px"></canvas>
+
+		<script src="scripts/pieces.js"></script>
+		<script src="scripts/display.js"></script>
+		<script src="scripts/tetris.js"></script>
+	</body>
+</html>
