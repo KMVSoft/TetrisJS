@@ -27,9 +27,8 @@ function Tetris(colCount, rowCount) {
 	}
 	this.newPiece = function() {
 		this.activePiece = new Pieces[randomInt(0, Pieces.length - 1)](
-			this,   (this.colCount / 2 | 0)-2,  1  )
-		this.activePiece.show()
-		this.activePiece.fall()
+			this,   (this.colCount / 2 | 0)-2,  1 )
+		this.activePiece.fall();	
 	}
 	this.isCorrectCoord = function(x, y) {
 		if (x>=0 && y>=0 && x<this.colCount && y<this.rowCount)
@@ -91,8 +90,8 @@ window.onkeypress = keyControl
 function keyControl(e) {
 	console.log(e.keyCode)
 	switch (e.keyCode) {
-		case 54: field.activePiece.move('right'); break;//to move right, press "6"
-		case 53: field.activePiece.turn(); break;//to turn, press "5"
-		case 52: field.activePiece.move('left'); break;//to move left, press "4"
+		case 100: field.activePiece.move('right'); break;//to move right, press "key right"
+		case 115: field.activePiece.turn(); break;//to turn, press "key down"
+		case 97: field.activePiece.move('left'); break;//to move left, press "key left"
 	}
 }

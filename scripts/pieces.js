@@ -57,6 +57,8 @@ function Piece(master, x, y) {
 		if (dir!=='left' &&  dir!=='right') { 
 			console.error('the function takes string "left" or "right"')
 			return
+		} else {
+			console.error(dir)
 		}
 		var vector = ((dir==='right') ? 1 : -1);
 		for (var i=0; i<this.cells.length; i++) 
@@ -99,11 +101,20 @@ function Piece(master, x, y) {
 		self = this;
 		setTimeout(function() {self.fall()}, self.speed);
 	}
+	//отображает фигуру тетриса на экране
+	//если отобразить не удалось false, иначе если отобразилась true
 	this.show = function() {
+		for (var i=0; i<this.cells.length; i++) {
+			if (! this.cells[i].isEmpty()) {
+				return false;
+			}
+		}
+
 		for (var i=0; i<this.cells.length; i++) {
 			this.cells[i].color = this.color;
 			this.master.display.setCell(this.cells[i].X, this.cells[i].Y, this.color);
 		}
+		return true;
 	}
 	this.clear = function() {
 		for (var i=0; i<this.cells.length; i++) {
@@ -124,10 +135,6 @@ function PieceL(master, x, y) {
 	//маска фигуры (шаблон)
 	this.cells = [this.master.cells[x][y-1], this.master.cells[x][y],
 				  this.master.cells[x+1][y], this.master.cells[x+2][y]];
-	for (var i=0; i<this.cells.length; i++) {
-		this.cells[i].master = this;
-		this.cells[i].color = this.color;
-	}
 }
 
 function PieceJ(master, x, y) {
@@ -136,10 +143,6 @@ function PieceJ(master, x, y) {
 	this.color = "blue"
 	this.cells = [this.master.cells[x][y], this.master.cells[x+1][y], 
 				this.master.cells[x+2][y], this.master.cells[x][y+1]];
-	for (var i=0; i<this.cells.length; i++) {
-		this.cells[i].master = this;
-		this.cells[i].color = this.color;
-	}
 }
 
 function PieceO(master, x, y) {
@@ -148,10 +151,6 @@ function PieceO(master, x, y) {
 	this.color = "yellow"
 	this.cells = [this.master.cells[x][y], this.master.cells[x+1][y],
 				 this.master.cells[x+1][y+1], this.master.cells[x][y+1]];
-	for (var i=0; i<this.cells.length; i++) {
-		this.cells[i].master = this;
-		this.cells[i].color = this.color;
-	}
 }
 
 function PieceZ(master, x, y) {
@@ -160,10 +159,6 @@ function PieceZ(master, x, y) {
 	this.color = "deepPink"
 	this.cells = [this.master.cells[x+1][y], this.master.cells[x][y],
 				 this.master.cells[x][y-1], this.master.cells[x-1][y-1]];
-	for (var i=0; i<this.cells.length; i++) {
-		this.cells[i].master = this;
-		this.cells[i].color = this.color;
-	}
 }
 
 function PieceS(master, x, y) {
@@ -172,10 +167,6 @@ function PieceS(master, x, y) {
 	this.color = "orange"
 	this.cells = [this.master.cells[x][y], this.master.cells[x+1][y],
 				 this.master.cells[x][y-1], this.master.cells[x+1][y+1]];
-	for (var i=0; i<this.cells.length; i++) {
-		this.cells[i].master = this;
-		this.cells[i].color = this.color;
-	};
 }
 
 function PieceI(master, x, y) {
@@ -184,10 +175,6 @@ function PieceI(master, x, y) {
 	this.color = 'red';
 	this.cells = [this.master.cells[x-1][y], this.master.cells[x][y], 
 				this.master.cells[x+1][y], this.master.cells[x+2][y]];
-	for (var i=0; i<this.cells.length; i++) {
-		this.cells[i].master = this;
-		this.cells[i].color = this.color;
-	}
 }
 function PieceT(master, x, y) {
 	extend(this, new Piece(master, x, y))
@@ -195,10 +182,6 @@ function PieceT(master, x, y) {
 	this.color = 'olive';
 	this.cells = [this.master.cells[x][y+1], this.master.cells[x][y], 
 				this.master.cells[x+1][y], this.master.cells[x-1][y]];
-	for (var i=0; i<this.cells.length; i++) {
-		this.cells[i].master = this;
-		this.cells[i].color = this.color;
-	}
 }
 
 Pieces = [PieceL, PieceJ, PieceO, PieceZ, PieceI, PieceS, PieceT]
